@@ -1,13 +1,14 @@
 <template>
-	<div class="posts-page">
+  <div class="posts-page">
 
-	</div>
+  </div>
 </template>
 
-<style scope>
-.post-page{
-	display: flex;
-	justify-content: center;
-	align-items: center;
+<style scoped>
+.posts-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>
+

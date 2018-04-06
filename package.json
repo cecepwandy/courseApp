@@ -1,8 +1,8 @@
 {
-  "name": "courseApp",
+  "name": "nuxt-course",
   "version": "1.0.0",
-  "description": "My grand Nuxt.js project",
-  "author": "cecep wandy",
+  "description": "Nuxt.js course for Udemy",
+  "author": "Maximilian Schwarzmüller",
   "private": true,
   "scripts": {
     "dev": "nuxt",
