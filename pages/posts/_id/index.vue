@@ -13,87 +13,77 @@
 		</section>
 	</div>
 </template>
-<script>
-export default {
-	asyncData(context) {
-		return new Promise((resolve,reject) => {
-			setTimeout(()=> {
-				resolve({
-					loadedPost: {
-						id: '1',
-						title: 'first Post (ID: '+context.route.params.id+")",
-						previewText: 'this is our fist post',
-						author: 'Cecep wandy',
-						updatedDate: new Date(),
-						content: 'so noob so this not the connten and the versa',
-						thumbnail:
-						'https://static.pexels.com/photos/270348/pexels-photo-270348.jpeg',
 
-					}
-				})
-			},1000)
-		})
-			.then(data=>{
-				return data
-			})
-			.catch(e=>{
-				contex.error(new Error())
-			})
-	}
-}
+<script>
+import axios from 'axios';
+export default {
+  asyncData(context) {
+    return axios
+      .get(
+        'https://nuxt-blog-c9156.firebaseio.com/post/' +
+          context.params.id +
+          '.json',
+      )
+      .then(res => {
+        return {
+          loadedPost: res.data,
+        };
+      })
+      .catch(e => context.error(e));
+  },
+};
 </script>
 
 <style scoped>
 .single-post-page {
-	padding: 30px;
-	text-align: center;
-	box-sizing: border-box;
+  padding: 30px;
+  text-align: center;
+  box-sizing: border-box;
 }
 
 .post {
-	width: 100%;
+  width: 100%;
 }
 
 @media (min-width: 768px) {
-	.post {
-		width: 600px;
-		margin: auto;
-	}
+  .post {
+    width: 600px;
+    margin: auto;
+  }
 }
 
 .post-title {
-	margin: 0;
+  margin: 0;
 }
 
 .post-details {
-	padding: 10px;
-	box-sizing: border-box;
-	border-bottom: 3px solid #ccc;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
+  padding: 10px;
+  box-sizing: border-box;
+  border-bottom: 3px solid #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 @media (min-width: 768px) {
-	.post-details {
-		flex-direction: row;
-	}
+  .post-details {
+    flex-direction: row;
+  }
 }
 
 .post-detail {
-	color: rgb(88, 88, 88);
-	margin: 0 10px;
+  color: rgb(88, 88, 88);
+  margin: 0 10px;
 }
 
 .post-feedback a {
-	color: red;
-	text-decoration: none;
+  color: red;
+  text-decoration: none;
 }
 
 .post-feedback a:hover,
 .post-feedback a:active {
-	color: salmon;
+  color: salmon;
 }
 </style>
-
