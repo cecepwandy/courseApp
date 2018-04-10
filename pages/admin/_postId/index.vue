@@ -6,24 +6,29 @@
 	</div>
 </template>
 <script>
-import AdminPostForm from '@/components/Admin/AdminPostForm'
-
+import AdminPostForm from '@/components/Admin/AdminPostForm';
+import axios from 'axios';
 export default {
-	layout: 'admin',
+  layout: 'admin',
   components: {
-		AdminPostForm
+    AdminPostForm,
   },
-	data() {
-		return {
-			loadedPost:{
-				author: "cecep wandy", 
-				title: "my awesome Post",
-				content: "Supper amazing thanks for that", 
-				thumbnailLink: "https://static.pexels.com/photos/270348/pexels-photo-270348.jpeg"
-			}
-		}
-	}
-}
+  asyncData(context) {
+    return axios
+      .get(
+        'https://nuxt-blog-c9156.firebaseio.com/posts/ ' +
+          context.params.postId +
+          '.json',
+      )
+      .then(res => {
+				console.log(res.data,'babab')
+        return {
+          loadedPost: {...res.data, id: context.params.postId},
+        };
+      })
+      .catch(e => context.error());
+  },
+};
 </script>
 <style scoped>
 .update-form {
